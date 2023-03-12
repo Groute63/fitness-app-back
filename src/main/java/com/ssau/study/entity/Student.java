@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "students", schema = "public")
+@Table(name = "students")
 public class Student {
 
     @Id
@@ -19,7 +19,7 @@ public class Student {
     @Temporal(value = TemporalType.DATE)
     private Date birthdate;
     private int number;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Group group;
 }

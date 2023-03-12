@@ -4,22 +4,21 @@ import com.ssau.study.entity.Group;
 import com.ssau.study.entity.Student;
 import com.ssau.study.pojo.GroupPojo;
 import com.ssau.study.pojo.StudentPojo;
-import com.ssau.study.repository.GroupRepository;
-import com.ssau.study.repository.StudentRepository;
+import com.ssau.study.repository.jparepository.GroupRepositoryJPA;
+import com.ssau.study.repository.jparepository.StudentRepositoryJPA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class GroupService {
-    private final GroupRepository groupRepository;
-
-    private final StudentRepository studentRepository;
-
+    private final GroupRepositoryJPA groupRepository;
+    private final StudentRepositoryJPA studentRepository;
 
     public List<GroupPojo> findAll(String name) {
         List<GroupPojo> result = new ArrayList<>();
@@ -30,18 +29,35 @@ public class GroupService {
     }
 
     public GroupPojo findById(Long id) {
-        var group = groupRepository.findById(id);
-        return group.map(GroupPojo::fromEntity).orElse(null);//group.isPresent() ? GroupPojo.fromEntity(group.get()) : null;
+        Optional<Group> group = groupRepository.findById(id);
+        return group.map(GroupPojo::fromEntity).orElse(null);
     }
 
 
     public GroupPojo create(GroupPojo groupPojo) {
         Group group = GroupPojo.toEntity(groupPojo);
-        List<Student> students = groupPojo.getStudents().stream().map(StudentPojo::toEntity).collect(Collectors.toList());
-        for(Student std: students){
-            std.setGroup(group);
+        if (groupPojo.getStudents() != null) {
+            List<Student> students = groupPojo.getStudents().stream().map(StudentPojo::toEntity).collect(Collectors.toList());
+            for (Student std : students) {
+                std.setGroup(group);
+            }
+            group.setStudents(students);
         }
-        group.setStudents(students);
+        return GroupPojo.fromEntity(groupRepository.save(group));
+    }
+
+    public void delete(long id) {
+        groupRepository.deleteById(id);
+    }
+
+    public StudentPojo addStudent(Long groupId, StudentPojo pojo){
+            var student = StudentPojo.toEntity(pojo);
+            student.setGroup(groupRepository.findById(groupId).orElseThrow());
+            return StudentPojo.fromEntity(studentRepository.save(student));
+    }
+
+    public GroupPojo update(GroupPojo groupPojo) {
+        Group group = GroupPojo.toEntity(groupPojo);
         return GroupPojo.fromEntity(groupRepository.save(group));
     }
 }

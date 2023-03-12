@@ -1,9 +1,7 @@
 package com.ssau.study.controller;
 
 import com.ssau.study.entity.Student;
-import com.ssau.study.pojo.StudentPojo;
 import com.ssau.study.repository.StudentRepository;
-import com.ssau.study.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,31 +11,9 @@ import java.util.List;
 @RequestMapping("/api/students")
 public class StudentController {
     @Autowired
-    private StudentService studentService;
-    @GetMapping()
-    public List<StudentPojo> findAllByNameContainingIgnoreCase(@RequestBody(required = false) String name){
-        return studentService.findAll(name);
-    }
-    @GetMapping("/{id}")
-    public StudentPojo findById(@PathVariable long id) {
-        return studentService.findById(id);
-    }
+    private StudentRepository studentRepository;
 
-    @PostMapping()
-    public StudentPojo add(@RequestParam long groupId, @RequestBody StudentPojo studentPojo){
-        return studentService.create(groupId,studentPojo);
-    }
-
-    @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable long id){
-        return studentService.deleteById(id);
-    }
-    @PutMapping()
-    public StudentPojo update(@RequestParam long groupId,@RequestBody StudentPojo studentPojo)
-    {
-        return studentService.update(studentPojo,groupId);
-    }
-    /*@GetMapping("/count")
+    @GetMapping("/count")
     public int count() {
         return studentRepository.count();
     }
@@ -47,18 +23,29 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
+    @GetMapping("/findByName/{name}")
+    public List<Student> findAllByName(@PathVariable String name) {
+        return studentRepository.findAllByName(name);
+    }
+
     @GetMapping("/{id}")
-    public Student findById(@PathVariable int id) {return studentRepository.findById(id);}
-
-    @PostMapping
-    public Student addStudent(@RequestBody Student std) {return studentRepository.addStudent(std);}
-
-    @DeleteMapping("/{id}")
-    public boolean deleteStudent(@PathVariable int id) {return studentRepository.deleteStudent(id);}
+    public Student findById(@PathVariable long id) {
+        return studentRepository.findById(id);
+    }
 
     @PutMapping
-    public Student updateStudent(@RequestBody Student std) {return studentRepository.updateStudent(std);}
+    public Long addStudent(@RequestBody Student student) {
+        return studentRepository.addStudent(student);
+    }
 
-     */
+    @DeleteMapping("/{id}")
+    public Long deleteStudent(@PathVariable long id) {
+        return studentRepository.deleteById(id);
+    }
+
+    @PostMapping
+    public Student updateStudent(@RequestBody Student student) {
+        return studentRepository.updateStudent(student);
+    }
+
 }
-

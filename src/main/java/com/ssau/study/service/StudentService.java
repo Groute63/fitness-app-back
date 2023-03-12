@@ -1,23 +1,22 @@
 package com.ssau.study.service;
 
-import com.ssau.study.entity.Group;
 import com.ssau.study.entity.Student;
-import com.ssau.study.pojo.GroupPojo;
 import com.ssau.study.pojo.StudentPojo;
-import com.ssau.study.repository.GroupRepository;
-import com.ssau.study.repository.StudentRepository;
+import com.ssau.study.repository.jparepository.GroupRepositoryJPA;
+import com.ssau.study.repository.jparepository.StudentRepositoryJPA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class StudentService {
-    private final GroupRepository groupRepository;
+    private final GroupRepositoryJPA groupRepository;
 
-    private final StudentRepository studentRepository;
+    private final StudentRepositoryJPA studentRepository;
 
     public List<StudentPojo> findAll(String name) {
         List<StudentPojo> result = new ArrayList<>();
@@ -28,7 +27,7 @@ public class StudentService {
     }
 
     public StudentPojo findById(Long id) {
-        var student = studentRepository.findById(id);
+        Optional<Student> student = studentRepository.findById(id);
         return student.map(StudentPojo::fromEntity).orElse(null);
     }
 
@@ -38,8 +37,8 @@ public class StudentService {
         return StudentPojo.fromEntity(studentRepository.save(student));
     }
 
-    public boolean deleteById(long id) {
-        return studentRepository.deleteById(id) > 0;
+    public void deleteById(long id) {
+        studentRepository.deleteById(id);
     }
 
     public StudentPojo update(StudentPojo studentPojo, long groupId) {
@@ -47,7 +46,6 @@ public class StudentService {
         if (groupId != 0)
             student.setGroup(groupRepository.findById(groupId).orElseThrow());
         return StudentPojo.fromEntity(studentRepository.save(student));
-
     }
 }
 

@@ -1,6 +1,5 @@
 package com.ssau.study.entity;
 
-import com.ssau.study.entity.Student;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +7,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "groups", schema = "public", uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
+@Table(name = "groups", schema = "public", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 @Getter
 @Setter
 public class Group {
@@ -18,6 +17,5 @@ public class Group {
     @Column(name = "name", columnDefinition = "text", length = 100, nullable = false, unique = true)
     private String name;
     @OneToMany(mappedBy = "group", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id")
     private List<Student> students;
 }
