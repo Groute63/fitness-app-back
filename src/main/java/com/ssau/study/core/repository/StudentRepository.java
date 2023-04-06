@@ -1,6 +1,6 @@
-package com.ssau.study.repository;
+package com.ssau.study.core.repository;
 
-import com.ssau.study.entity.Student;
+import com.ssau.study.core.entity.Student;
 
 import java.util.List;
 

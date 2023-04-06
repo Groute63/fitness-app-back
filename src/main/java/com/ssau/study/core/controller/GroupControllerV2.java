@@ -1,11 +1,11 @@
-package com.ssau.study.controller;
+package com.ssau.study.core.controller;
 
-import com.ssau.study.entity.Student;
-import com.ssau.study.pojo.GroupPojo;
-import com.ssau.study.pojo.StudentPojo;
-import com.ssau.study.service.GroupService;
+import com.ssau.study.core.service.GroupService;
+import com.ssau.study.core.pojo.GroupPojo;
+import com.ssau.study.core.pojo.StudentPojo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

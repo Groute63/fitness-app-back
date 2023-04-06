@@ -1,4 +1,4 @@
-package com.ssau.study.entity;
+package com.ssau.study.core.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

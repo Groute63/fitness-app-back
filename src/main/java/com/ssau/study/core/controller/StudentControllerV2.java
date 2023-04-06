@@ -1,7 +1,7 @@
-package com.ssau.study.controller;
+package com.ssau.study.core.controller;
 
-import com.ssau.study.pojo.StudentPojo;
-import com.ssau.study.service.StudentService;
+import com.ssau.study.core.service.StudentService;
+import com.ssau.study.core.pojo.StudentPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

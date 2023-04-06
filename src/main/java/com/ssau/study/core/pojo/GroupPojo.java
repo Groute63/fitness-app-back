@@ -1,7 +1,7 @@
-package com.ssau.study.pojo;
+package com.ssau.study.core.pojo;
 
-import com.ssau.study.entity.Group;
-import com.ssau.study.entity.Student;
+import com.ssau.study.core.entity.Group;
+import com.ssau.study.core.entity.Student;
 import lombok.Getter;
 import lombok.Setter;
 

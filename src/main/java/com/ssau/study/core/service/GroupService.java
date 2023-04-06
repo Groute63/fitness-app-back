@@ -1,11 +1,11 @@
-package com.ssau.study.service;
+package com.ssau.study.core.service;
 
-import com.ssau.study.entity.Group;
-import com.ssau.study.entity.Student;
-import com.ssau.study.pojo.GroupPojo;
-import com.ssau.study.pojo.StudentPojo;
-import com.ssau.study.repository.jparepository.GroupRepositoryJPA;
-import com.ssau.study.repository.jparepository.StudentRepositoryJPA;
+import com.ssau.study.core.entity.Group;
+import com.ssau.study.core.entity.Student;
+import com.ssau.study.core.pojo.GroupPojo;
+import com.ssau.study.core.pojo.StudentPojo;
+import com.ssau.study.core.repository.jparepository.GroupRepositoryJPA;
+import com.ssau.study.core.repository.jparepository.StudentRepositoryJPA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

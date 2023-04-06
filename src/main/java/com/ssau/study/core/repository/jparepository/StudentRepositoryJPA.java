@@ -1,9 +1,7 @@
-package com.ssau.study.repository.jparepository;
+package com.ssau.study.core.repository.jparepository;
 
-import com.ssau.study.entity.Student;
+import com.ssau.study.core.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.ssau.study.controller;
+package com.ssau.study.core.controller;
 
-import com.ssau.study.entity.Student;
-import com.ssau.study.repository.StudentRepository;
+import com.ssau.study.core.entity.Student;
+import com.ssau.study.core.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
