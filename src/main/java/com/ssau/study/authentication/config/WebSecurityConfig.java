@@ -40,11 +40,11 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return http.build();
     }
 
-   /* @Override
+   @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .maxAge(3600)
-                .allowedOrigins("http://localhost:3000/")
+                .allowedOrigins("http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Origin", "Access-Control-Allow-Origin", "Content-Type", "Accept",
                         "Authorization", "Origin, Accept", "X-Requested-With",
@@ -53,7 +53,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                         "Access-Control-Allow-Origin", "Access-Control-Allow-Origin",
                         "Access-Control-Allow-Credentials")
                 .allowCredentials(true);
-    }*/
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {
